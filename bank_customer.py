@@ -9,7 +9,6 @@ Original file is located at
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import seaborn as sns
 
 df=pd.read_csv('/content/Bank Customer Churn Prediction.csv')
@@ -87,4 +86,31 @@ scaled_data= std.transform(new_customer_data)
 churn_prediction= cls.predict(scaled_data)
 
 churn_prediction
+
+from sklearn.metrics import confusion_matrix
+
+y_predicted= cls.predict(X_test)
+
+confusion_matrix(y_test, y_predicted)
+
+reliability= cls.score(X_test, y_test)
+
+reliability
+
+from sklearn.model_selection import cross_val_score
+cross_validation_score= cross_val_score(cls, X_train, y_train, cv=10)
+
+cross_validation_score.mean()
+
+f1_score= cross_val_score(cls, X_train, y_train, cv=10, scoring='f1')
+
+f1_score.mean()
+
+precision_score= cross_val_score(cls, X_train, y_train, cv=10, scoring='precision')
+
+precision_score.mean()
+
+import pickle
+
+pickle.dump(cls,open('cls.sav','wb'))
 
